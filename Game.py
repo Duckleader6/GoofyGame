@@ -15,7 +15,20 @@ a1 = False
 a2 = False
 a3 = False
 a4 = False
+a5 = False
 #--------------------------------------------
+
+#Functions
+def endfoot():
+    global room, start
+    play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
+    if play_again == 1:
+        room = 0
+    elif play_again == 2:
+        start = False
+        room = 0
+    else:
+        print("Invalid input, please choose 1 or 2")
 
 #Beginning Screen and Endings-----------------------------------------------------------
 while True:
@@ -39,6 +52,8 @@ while True:
             print("=== Sleepyhead (Ending 3)")
         if a4 == True:
             print("=== Crybaby (Ending 4) ===")
+        if a5 == True:
+            print("=== Dodgeball? (Ending 5)")
         onascr = int(input("Leave(1)"))
         if onascr == 1:
             room = 0
@@ -231,9 +246,15 @@ while True:
                     room = 12
 
             case 13:
-                #roomB222
-                print("test")
-                room = 0
+                #roomB222 Ending
+                print("\n=== You ball up and cry ===")
+                print("You eventually ball up into a actual dodgeball")
+                print("You lose all ability to feel and are inanimate so you're practically dead")
+                print("Game Over!")
+                if a5 == False:
+                    print("You've unlocked Ending 5")
+                a5 = True
+                endfoot()
 
             case 14:
                 #roomB121
@@ -268,4 +289,3 @@ while True:
                 room = 0
 #---------------------------------------------------------------------------------------------------------
 
-#Functions
