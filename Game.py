@@ -130,13 +130,51 @@ while True:
                 #roomB22
                 print("=== What are you gonna try? ===")
                 option5 = int(input("Start ripping at the floor(1) Cry in a corner(2)"))
+                if option5 == 1:
+                    room = 12
+                elif option5 ==2:
+                    room = 13
+                else:
+                    room = 6
+                    print("Invalid Input")
 
             case 7:
                 #RoomB11
-                print("test")
+                print("=== You made your pillow fort out of the cotton ===")
+                print("The fort is pretty cozy and it makes you feel safe")
+                option6 = int(input("Fall Asleep(1) Dwell in your fort(2) Kick the fort down(3)"))
+                if option6 == 1:
+                    room =9
+                elif option6 ==2:
+                    room =10
+                elif option6 ==3:
+                    room = 11
+                else:
+                    room = 7
+                    print("Invalid input")
 
             case 8:
                 #RoomB12
+                print("test")
+
+            case 9:
+                #roomB111
+                print("test")
+            
+            case 10:
+                #roomB112
+                print("test")
+            
+            case 11:
+                #roomB113
+                print("test")
+            
+            case 12:
+                #roomB221
+                print("test")
+
+            case 13:
+                #roomB222
                 print("test")
 
             case _:
