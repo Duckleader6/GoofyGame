@@ -37,6 +37,8 @@ while True:
             print("=== The Sun God (Ending 2) ===")
         if a3 == True:
             print("=== Sleepyhead (Ending 3)")
+        if a4 == True:
+            print("=== Crybaby (Ending 4) ===")
         onascr = int(input("Leave(1)"))
         if onascr == 1:
             room = 0
