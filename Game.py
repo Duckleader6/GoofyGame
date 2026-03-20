@@ -11,11 +11,12 @@
 onascr = 1
 room = 0
 start = False
-a1 = False
-a2 = False
-a3 = False
-a4 = False
-a5 = False
+bade1 = False
+bade2 = False
+bade3 = False
+bade4 = False
+bade5 = False
+bade6 = False
 #--------------------------------------------
 
 #Functions
@@ -44,16 +45,20 @@ while True:
     elif option == 3:
         room = -2
         onascr = 0
-        if a1 == True:
-            print("=== You killed yourself, Why (Ending 1) ===")
-        if a2 == True:
-            print("=== The Sun God (Ending 2) ===")
-        if a3 == True:
-            print("=== Sleepyhead (Ending 3)")
-        if a4 == True:
-            print("=== Crybaby (Ending 4) ===")
-        if a5 == True:
-            print("=== Dodgeball? (Ending 5)")
+        print("Bad Endings:")
+        if bade1 == True:
+            print("=== You killed yourself, Why (Bad Ending 1) ===")
+        if bade2 == True:
+            print("=== The Sun God (Bad Ending 2) ===")
+        if bade3 == True:
+            print("=== Sleepyhead (Bad Ending 3)")
+        if bade4 == True:
+            print("=== Crybaby (Bad Ending 4) ===")
+        if bade5 == True:
+            print("=== Dodgeball? (Bad Ending 5)")
+        if bade6 == True:
+            print("=== Cave In (Bad Ending 6) ===")
+        print("Good Endings:")
         onascr = int(input("Leave(1)"))
         if onascr == 1:
             room = 0
@@ -81,9 +86,9 @@ while True:
                 #roomA Ending
                 print("\n=== You Died, should we celebrate ===")
                 print("Game Over!")
-                if a1 == False:
-                    print("You've unlocked Ending 1")
-                a1 = True
+                if bade1 == False:
+                    print("You've unlocked Bad Ending 1")
+                bade1 = True
                 endfoot()
             
             case 2:
@@ -128,9 +133,9 @@ while True:
                 #roomB21 Ending
                 print("\n=== You became the sun god through profuse meditation, the heat was too much for you human body though so you incinerated ===")
                 print("Game Over!")
-                if a2 == False:
-                    print("You've unlocked Ending 2")
-                a2 = True
+                if bade2 == False:
+                    print("You've unlocked Bad Ending 2")
+                bade2 = True
                 endfoot()
                 
             case 6:
@@ -176,9 +181,9 @@ while True:
                 #roomB111 Ending
                 print("\n=== You fell asleep and never woke up ===")
                 print("Game Over!")
-                if a3 == False:
-                    print("You've unlocked Ending 3")
-                a3 = True
+                if bade3 == False:
+                    print("You've unlocked Bad Ending 3")
+                bade3 = True
                 endfoot()
             
             case 10:
@@ -199,9 +204,9 @@ while True:
                 print("\n=== The Fort goes down ===")
                 print("You watch as it falls endlessly crying as you watch\nyou creation die. Nothing will save it.\nThe tears won't stop pouring for hours.\nYou eventually are too dehrdrated to live.")
                 print("Game Over")
-                if a4 == False:
-                    print("You've unlocked Ending 4")
-                a4 = True
+                if bade4 == False:
+                    print("You've unlocked Bad Ending 4")
+                bade4 = True
                 endfoot()
                     
             case 12:
@@ -223,15 +228,19 @@ while True:
                 print("You eventually ball up into a actual dodgeball")
                 print("You lose all ability to feel and are inanimate so you're practically dead")
                 print("Game Over!")
-                if a5 == False:
-                    print("You've unlocked Ending 5")
-                a5 = True
+                if bade5 == False:
+                    print("You've unlocked Bad Ending 5")
+                bade5 = True
                 endfoot()
 
             case 14:
-                #roomB121
-                print("69")
-                room = 0
+                #roomB121 Ending
+                print("\n=== Cave In ===")
+                print("The cotton falls at the entrance of your tunnel.\nThere is no way out, the cotton slowly starts falling on you.\nafter around an hour the cotton surrounds you and you suffocate")
+                if bade6 == False:
+                    print("You've unlocked Bad Ending 6")
+                bade6 = True
+                endfoot()
 
             case 15:
                 #roomB122
