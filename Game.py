@@ -84,14 +84,7 @@ while True:
                 if a1 == False:
                     print("You've unlocked Ending 1")
                 a1 = True
-                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
-                if play_again == 1:
-                    room = 0
-                elif play_again == 2:
-                    start = False
-                    room = 0
-                else:
-                    print("Invalid input, please choose 1 or 2")
+                endfoot()
             
             case 2:
                 #roomB
@@ -138,14 +131,7 @@ while True:
                 if a2 == False:
                     print("You've unlocked Ending 2")
                 a2 = True
-                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
-                if play_again == 1:
-                    room = 0
-                elif play_again == 2:
-                    start = False
-                    room = 0
-                else:
-                    print("Invalid input, please choose 1 or 2")
+                endfoot()
                 
             case 6:
                 #roomB22
@@ -187,20 +173,13 @@ while True:
                     print("Invalid Input")
                     room = 8
             case 9:
-                #roomB111
+                #roomB111 Ending
                 print("\n=== You fell asleep and never woke up ===")
                 print("Game Over!")
                 if a3 == False:
                     print("You've unlocked Ending 3")
                 a3 = True
-                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
-                if play_again == 1:
-                    room = 0
-                elif play_again == 2:
-                    start = False
-                    room = 0
-                else:
-                    print("Invalid input, please choose 1 or 2")
+                endfoot()
             
             case 10:
                 #roomB112
@@ -216,21 +195,14 @@ while True:
                     room = 10
                 
             case 11:
-                #roomB113
+                #roomB113 Ending
                 print("\n=== The Fort goes down ===")
                 print("You watch as it falls endlessly crying as you watch\nyou creation die. Nothing will save it.\nThe tears won't stop pouring for hours.\nYou eventually are too dehrdrated to live.")
                 print("Game Over")
                 if a4 == False:
                     print("You've unlocked Ending 4")
                 a4 = True
-                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
-                if play_again == 1:
-                    room = 0
-                elif play_again == 2:
-                    start = False
-                    room = 0
-                else:
-                    print("Invalid input, please choose 1 or 2")
+                endfoot()
                     
             case 12:
                 #roomB221
