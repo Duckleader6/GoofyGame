@@ -13,6 +13,8 @@ room = 0
 start = False
 a1 = False
 a2 = False
+a3 = False
+a4 = False
 #--------------------------------------------
 
 #Beginning Screen and Endings-----------------------------------------------------------
@@ -33,6 +35,8 @@ while True:
             print("=== You killed yourself, Why (Ending 1) ===")
         if a2 == True:
             print("=== The Sun God (Ending 2) ===")
+        if a3 == True:
+            print("=== Sleepyhead (Ending 3)")
         onascr = int(input("Leave(1)"))
         if onascr == 1:
             room = 0
@@ -155,20 +159,62 @@ while True:
 
             case 8:
                 #RoomB12
-                print("test")
-
+                print("=== you punch further ===")
+                print("A cave of cotton starts to form")
+                option7 = int(input("Keep punching(1) Leave your cave(2)"))
+                if option7 == 1:
+                    room = 14
+                elif option7 == 2:
+                    room =15
+                else:
+                    print("Invalid Input")
+                    room = 8
             case 9:
                 #roomB111
-                print("test")
+                print("=== You fell asleep and never woke up ===")
+                print("Game Over!")
+                if a3 == False:
+                    print("You've unlocked Ending 3")
+                a3 = True
+                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
+                if play_again == 1:
+                    room = 0
+                elif play_again == 2:
+                    start = False
+                    room = 0
+                else:
+                    print("Invalid input, please choose 1 or 2")
             
             case 10:
                 #roomB112
-                print("test")
-            
+                print("=== Sans. starts to play ===")
+                print("The music floods your ears and you might fall asleep if you stay any longer")
+                option8 = int(input("Listen to the Music Further(1) Leave the fort(2)"))
+                if option8 == 1:
+                    room = 16
+                elif option8 ==2:
+                    room =17
+                else:
+                    print("Invalid Input")
+                    room = 10
+                
             case 11:
                 #roomB113
-                print("test")
-            
+                print("=== The Fort goes down ===")
+                print("You watch as it falls endlessly crying as you watch\nyou creation die. Nothing will save it.\nThe tears won't stop pouring for hours.\nYou eventually are too dehrdrated to live.")
+                print("Game Over")
+                if a4 == False:
+                    print("You've unlocked Ending 4")
+                a4 = True
+                play_again = int(input("Play again? (1) Yes (2) Return to Main Menu: "))
+                if play_again == 1:
+                    room = 0
+                elif play_again == 2:
+                    start = False
+                    room = 0
+                else:
+                    print("Invalid input, please choose 1 or 2")
+                    
             case 12:
                 #roomB221
                 print("test")
@@ -177,7 +223,25 @@ while True:
                 #roomB222
                 print("test")
 
+            case 14:
+                #roomB121
+                print("69")
+
+            case 15:
+                #roomB122
+                print('test')
+
+            case 16:
+                #roomB1121
+                print("test")
+
+            case 17:
+                #roomB1122
+                print("test")
+
             case _:
                 print("Invalid room number!")
                 room = 0
 #---------------------------------------------------------------------------------------------------------
+
+#Functions
