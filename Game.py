@@ -132,9 +132,11 @@ while True:
                 option5 = int(input("Start ripping at the floor(1) Cry in a corner(2)"))
 
             case 7:
+                #Room B11
                 print("test")
 
             case 8:
+                #Room B12
                 print("test")
 
             case _:
