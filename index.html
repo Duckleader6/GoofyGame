@@ -98,35 +98,15 @@
       pyodide.globals.set('write_output', writeOutput);
       pyodide.globals.set('window', window);
 
-      // Python setup for stdout/stderr/input mapping
-      const pythonSetup = `
-import sys, builtins
-from js import write_output, window
-class Output:
-    def write(self, data):
-        if data is None:
-            return
-        write_output(str(data))
-    def flush(self):
-        pass
-sys.stdout = sys.stderr = Output()
+      // Python setup for stdout/stderr mapping and non-modal async input
+      const transformedGameCode = gameCode.replace(/\binput\s*\(/g, 'await input_async(');
 
-orig_input = builtins.input
+      const indentCode = (code, spaces) => code
+        .split('\n')
+        .map(line => ' '.repeat(spaces) + line)
+        .join('\n');
 
-def terminal_input(prompt=''):
-    if prompt:
-        write_output(prompt)
-    import time
-    while True:
-        value = window.read_from_queue()
-        if value is not None:
-            return str(value).rstrip('\n')
-        time.sleep(0.05)
-
-builtins.input = terminal_input
-`;
-
-      await pyodide.runPythonAsync(pythonSetup);
+      const fullCode = `import sys, builtins, asyncio\nfrom js import write_output, window\n\nclass Output:\n    def write(self, data):\n        if data is None:\n            return\n        write_output(str(data))\n    def flush(self):\n        pass\n\nsys.stdout = sys.stderr = Output()\n\nasync def input_async(prompt=''):\n    if prompt:\n        write_output(prompt)\n    while True:\n        value = window.read_from_queue()\n        if value is not None:\n            return str(value).rstrip('\\n')\n        await asyncio.sleep(0.05)\n\nasync def main():\n${indentCode(transformedGameCode, 4)}\n\nawait main()\n`;
 
       // Run the game logic in a separate async task
       isRunning = true;
@@ -136,7 +116,7 @@ builtins.input = terminal_input
       statusEl.textContent = 'Game running. Use the prompt line below to send answers.';
 
       try {
-        await pyodide.runPythonAsync(gameCode);
+        await pyodide.runPythonAsync(fullCode);
       } catch (error) {
         appendOutput('\n\n[Error] ' + error + '\n');
       } finally {
