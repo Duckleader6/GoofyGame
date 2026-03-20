@@ -116,11 +116,12 @@ orig_input = builtins.input
 def terminal_input(prompt=''):
     if prompt:
         write_output(prompt)
-    # fallback to window.prompt for compatibility
-    value = window.prompt(prompt)
-    if value is None:
-        raise EOFError('Input cancelled')
-    return str(value)
+    import time
+    while True:
+        value = window.read_from_queue()
+        if value is not None:
+            return str(value).rstrip('\n')
+        time.sleep(0.05)
 
 builtins.input = terminal_input
 `;
