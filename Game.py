@@ -220,26 +220,32 @@ while True:
             case 12:
                 #roomB221
                 print("test")
+                room = 0
 
             case 13:
                 #roomB222
                 print("test")
+                room = 0
 
             case 14:
                 #roomB121
                 print("69")
+                room = 0
 
             case 15:
                 #roomB122
                 print('test')
+                room = 0
 
             case 16:
                 #roomB1121
                 print("test")
+                room = 0
 
             case 17:
                 #roomB1122
                 print("test")
+                room = 0
 
             case _:
                 print("Invalid room number!")
