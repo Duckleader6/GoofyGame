@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoofyGame Terminal</title>
+  <style>
+    body { margin: 0; font-family: "Fira Mono", "Courier New", monospace; background: #0b1220; color: #f8f8f2; }
+    .container { display: flex; width: 100vw; height: 100vh; align-items: center; justify-content: center; }
+    .terminal { width: min(1000px, 90vw); max-height: 95vh; background: #011627; border: 1px solid #25f7b5; border-radius: 8px; box-shadow: 0 0 20px rgba(0, 0, 0, .7); overflow: hidden; display: flex; flex-direction: column; }
+    .output { flex: 1; padding: 16px; overflow-y: auto; white-space: pre-wrap; line-height: 1.4; }
+    .input-area { border-top: 1px solid #2e3b55; padding: 10px; background: #0f172a; display: flex; gap: 8px; }
+    .input-area input { flex: 1; background: #0f172a; color: #cce7ff; border: 1px solid #2e3b55; border-radius: 4px; padding: 10px; font-family: inherit; }
+    .input-area button { background: #25f7b5; border: none; border-radius: 4px; padding: 10px 14px; font-weight: 700; cursor: pointer; }
+    .input-area button:hover { background: #18c99a; }
+    .status { padding: 6px 10px; font-size: 0.85rem; color: #89ddff; background: #011627; border-bottom: 1px solid #2e3b55; }
+    .loading { animation: blink 1.2s infinite; }
+    @keyframes blink { 0%, 100% { opacity: 0.5 } 50% { opacity: 1 } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="terminal">
+      <div class="status" id="status">Loading Pyodide... hold on.</div>
+      <div class="output" id="terminal-output"></div>
+      <div class="input-area">
+        <input id="terminal-input" type="text" placeholder="Type your answer and press Enter" disabled />
+        <button id="enter-btn" disabled>Enter</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    const outputEl = document.getElementById('terminal-output');
+    const inputEl = document.getElementById('terminal-input');
+    const enterBtn = document.getElementById('enter-btn');
+    const statusEl = document.getElementById('status');
+
+    let inputQueue = [];
+    let isRunning = false;
+
+    function appendOutput(text, opts = {}) {
+      if (typeof text !== 'string') text = String(text);
+      const escaped = text.replace(/\u0008/g, '');
+      outputEl.textContent += escaped;
+      outputEl.scrollTop = outputEl.scrollHeight;
+    }
+
+    function writeOutput(text) {
+      appendOutput(text);
+    }
+
+    function clearInput() {
+      inputEl.value = '';
+      inputEl.focus();
+    }
+
+    function queueInput(value) {
+      inputQueue.push(value + '\n');
+      inputEl.value = '';
+      inputEl.focus();
+    }
+
+    enterBtn.addEventListener('click', () => {
+      const value = inputEl.value;
+      if (!isRunning) return;
+      queueInput(value);
+    });
+
+    inputEl.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        enterBtn.click();
+      }
+    });
+
+    async function setup() {
+      statusEl.textContent = 'Loading Pyodide...';
+      const pyodide = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.0/full/' });
+      statusEl.textContent = 'Pyodide loaded. Loading game script...';
+      const response = await fetch('Game.py');
+      if (!response.ok) {
+        statusEl.textContent = 'Could not load Game.py (404?).';
+        appendOutput('Error: unable to fetch Game.py.');
+        return;
+      }
+      const gameCode = await response.text();
+
+      // expose JS helper functions to Python
+      window.write_output = writeOutput;
+      window.read_from_queue = () => {
+        if (inputQueue.length > 0) {
+          return inputQueue.shift();
+        }
+        return null;
+      };
+
+      pyodide.globals.set('write_output', writeOutput);
+      pyodide.globals.set('window', window);
+
+      // Python setup for stdout/stderr/input mapping
+      const pythonSetup = `
+import sys, builtins
+from js import write_output, window
+class Output:
+    def write(self, data):
+        if data is None:
+            return
+        write_output(str(data))
+    def flush(self):
+        pass
+sys.stdout = sys.stderr = Output()
+
+orig_input = builtins.input
+
+def terminal_input(prompt=''):
+    if prompt:
+        write_output(prompt)
+    # fallback to window.prompt for compatibility
+    value = window.prompt(prompt)
+    if value is None:
+        raise EOFError('Input cancelled')
+    return str(value)
+
+builtins.input = terminal_input
+`;
+
+      await pyodide.runPythonAsync(pythonSetup);
+
+      // Run the game logic in a separate async task
+      isRunning = true;
+      inputEl.disabled = false;
+      enterBtn.disabled = false;
+      clearInput();
+      statusEl.textContent = 'Game running. Use the prompt line below to send answers.';
+
+      try {
+        await pyodide.runPythonAsync(gameCode);
+      } catch (error) {
+        appendOutput('\n\n[Error] ' + error + '\n');
+      } finally {
+        isRunning = false;
+        inputEl.disabled = true;
+        enterBtn.disabled = true;
+        statusEl.textContent = 'Game finished. Reload to play again.';
+      }
+    }
+
+    window.addEventListener('load', setup);
+  </script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.0/full/pyodide.js"></script>
+</body>
+</html>
