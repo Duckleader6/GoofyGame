@@ -93,7 +93,7 @@ while True:
             
             case 3:
                 #RoomB1
-                print("=== Do you think you're Rocky? ===")
+                print("\n=== Do you think you're Rocky? ===")
                 print("You repeatedly punch the wall and realize it is made of pillows.\nYou collect the cotton but the pillows seem endless so you eventually stop punching.")
                 option3 = int(input("Make a cotton pillow fort(1) Keep on punching(2)"))
                 if option3 == 1:
@@ -106,7 +106,7 @@ while True:
 
             case 4:
                 #roomB2
-                print("=== Meditation ===")
+                print("\n=== Meditation ===")
                 print("You meditate and slowly gain peace of mind")
                 option4 = int(input("Meditate Further(1) Stop meditating and try somethig else(2)"))
                 if option4 == 1:
@@ -134,7 +134,7 @@ while True:
                 
             case 6:
                 #roomB22
-                print("=== What are you gonna try? ===")
+                print("\n=== What are you gonna try? ===")
                 option5 = int(input("Start ripping at the floor(1) Cry in a corner(2)"))
                 if option5 == 1:
                     room = 12
@@ -146,7 +146,7 @@ while True:
 
             case 7:
                 #RoomB11
-                print("=== You made your pillow fort out of the cotton ===")
+                print("\n=== You made your pillow fort out of the cotton ===")
                 print("The fort is pretty cozy and it makes you feel safe")
                 option6 = int(input("Fall Asleep(1) Dwell in your fort(2) Kick the fort down(3)"))
                 if option6 == 1:
@@ -161,7 +161,7 @@ while True:
 
             case 8:
                 #RoomB12
-                print("=== you punch further ===")
+                print("\n=== you punch further ===")
                 print("A cave of cotton starts to form")
                 option7 = int(input("Keep punching(1) Leave your cave(2)"))
                 if option7 == 1:
@@ -173,7 +173,7 @@ while True:
                     room = 8
             case 9:
                 #roomB111
-                print("=== You fell asleep and never woke up ===")
+                print("\n=== You fell asleep and never woke up ===")
                 print("Game Over!")
                 if a3 == False:
                     print("You've unlocked Ending 3")
@@ -189,7 +189,7 @@ while True:
             
             case 10:
                 #roomB112
-                print("=== Sans. starts to play ===")
+                print("\n=== Sans. starts to play ===")
                 print("The music floods your ears and you might fall asleep if you stay any longer")
                 option8 = int(input("Listen to the Music Further(1) Leave the fort(2)"))
                 if option8 == 1:
@@ -202,7 +202,7 @@ while True:
                 
             case 11:
                 #roomB113
-                print("=== The Fort goes down ===")
+                print("\n=== The Fort goes down ===")
                 print("You watch as it falls endlessly crying as you watch\nyou creation die. Nothing will save it.\nThe tears won't stop pouring for hours.\nYou eventually are too dehrdrated to live.")
                 print("Game Over")
                 if a4 == False:
@@ -219,8 +219,16 @@ while True:
                     
             case 12:
                 #roomB221
-                print("test")
-                room = 0
+                print("\n=== You tear through the floor===")
+                print("Nothing much came from the experience other than a hole")
+                option9 = int(input("jump out the hole(1) Dig Deeper(2)"))
+                if option9 == 1:
+                    room = 18
+                elif option9 == 2 :
+                    room = 19
+                else:
+                    print("invalid Input")
+                    room = 12
 
             case 13:
                 #roomB222
@@ -244,6 +252,14 @@ while True:
 
             case 17:
                 #roomB1122
+                print("test")
+                room = 0
+            
+            case 18:
+                print("test")
+                room = 0
+            
+            case 19:
                 print("test")
                 room = 0
 
